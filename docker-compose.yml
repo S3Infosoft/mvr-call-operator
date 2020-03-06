@@ -1,9 +1,9 @@
-version: '3.7'
+version: '2'
 
 services:
 
   sample:
-    container_name: sample
+    container_name: react_coreui_docker
     build:
       context: .
       dockerfile: Dockerfile

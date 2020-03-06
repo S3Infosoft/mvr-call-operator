@@ -20,8 +20,6 @@ class App extends Component {
         <Security
           issuer="https://dev-441752.okta.com/oauth2/default"
           clientId="0oa2p2u1bZpalmWdQ4x6"
-          
-
           redirectUri={window.location.origin + "/implicit/callback"}
           onAuthRequired={onAuthRequired}
           pkce={true}

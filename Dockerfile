@@ -14,4 +14,5 @@ RUN npm install --silent
 RUN npm install react-scripts -g --silent
 
 # start app
+EXPOSE 3000
 CMD ["npm", "start"]

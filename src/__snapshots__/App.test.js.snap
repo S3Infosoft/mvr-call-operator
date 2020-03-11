@@ -1,0 +1,336 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders App component and validate its snapshot 1`] = `
+<div>
+  <div>
+    <div
+      class="App"
+    >
+      <nav
+        class="navbar navbar-expand-sm navbar-dark bg-dark mb-4"
+      >
+        <div
+          class="container"
+        >
+          <a
+            class="navbar-brand"
+            href="/"
+          >
+            S3InfoSoft Portal
+          </a>
+          <button
+            class="navbar-toggler"
+            data-target="#navbarNav"
+            data-toggle="collapse"
+            type="button"
+          >
+            <span
+              class="navbar-toggler-icon"
+            />
+          </button>
+          <div
+            class="collapse navbar-collapse"
+            id="navbarNav"
+          >
+            <ul
+              class="navbar-nav ml-auto"
+            >
+              <li
+                class="nav-item"
+              >
+                <a
+                  class="nav-link"
+                  href="/"
+                >
+                  Home
+                </a>
+              </li>
+              <li
+                class="nav-item"
+              >
+                <a
+                  class="nav-link"
+                  href="/staff"
+                >
+                  Dashboard
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div
+        class="container"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders App component and validate its snapshot 2`] = `
+<div>
+  <div>
+    <div
+      class="App"
+    >
+      <nav
+        class="navbar navbar-expand-sm navbar-dark bg-dark mb-4"
+      >
+        <div
+          class="container"
+        >
+          <a
+            class="navbar-brand"
+            href="/"
+          >
+            S3InfoSoft Portal
+          </a>
+          <button
+            class="navbar-toggler"
+            data-target="#navbarNav"
+            data-toggle="collapse"
+            type="button"
+          >
+            <span
+              class="navbar-toggler-icon"
+            />
+          </button>
+          <div
+            class="collapse navbar-collapse"
+            id="navbarNav"
+          >
+            <ul
+              class="navbar-nav ml-auto"
+            >
+              <li
+                class="nav-item"
+              >
+                <a
+                  class="nav-link"
+                  href="/"
+                >
+                  Home
+                </a>
+              </li>
+              <li
+                class="nav-item"
+              >
+                <a
+                  class="nav-link"
+                  href="/staff"
+                >
+                  Dashboard
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div
+        class="container"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders comp 1`] = `
+<div>
+  <div>
+    <div
+      class="App"
+    >
+      <nav
+        class="navbar navbar-expand-sm navbar-dark bg-dark mb-4"
+      >
+        <div
+          class="container"
+        >
+          <a
+            class="navbar-brand"
+            href="/"
+          >
+            S3InfoSoft Portal
+          </a>
+          <button
+            class="navbar-toggler"
+            data-target="#navbarNav"
+            data-toggle="collapse"
+            type="button"
+          >
+            <span
+              class="navbar-toggler-icon"
+            />
+          </button>
+          <div
+            class="collapse navbar-collapse"
+            id="navbarNav"
+          >
+            <ul
+              class="navbar-nav ml-auto"
+            >
+              <li
+                class="nav-item"
+              >
+                <a
+                  class="nav-link"
+                  href="/"
+                >
+                  Home
+                </a>
+              </li>
+              <li
+                class="nav-item"
+              >
+                <a
+                  class="nav-link"
+                  href="/staff"
+                >
+                  Dashboard
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div
+        class="container"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders component and validate its snapshot 1`] = `
+<div>
+  <div>
+    <div
+      class="App"
+    >
+      <nav
+        class="navbar navbar-expand-sm navbar-dark bg-dark mb-4"
+      >
+        <div
+          class="container"
+        >
+          <a
+            class="navbar-brand"
+            href="/"
+          >
+            S3InfoSoft Portal
+          </a>
+          <button
+            class="navbar-toggler"
+            data-target="#navbarNav"
+            data-toggle="collapse"
+            type="button"
+          >
+            <span
+              class="navbar-toggler-icon"
+            />
+          </button>
+          <div
+            class="collapse navbar-collapse"
+            id="navbarNav"
+          >
+            <ul
+              class="navbar-nav ml-auto"
+            >
+              <li
+                class="nav-item"
+              >
+                <a
+                  class="nav-link"
+                  href="/"
+                >
+                  Home
+                </a>
+              </li>
+              <li
+                class="nav-item"
+              >
+                <a
+                  class="nav-link"
+                  href="/staff"
+                >
+                  Dashboard
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div
+        class="container"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with or without a name 1`] = `
+<div>
+  <div>
+    <div
+      class="App"
+    >
+      <nav
+        class="navbar navbar-expand-sm navbar-dark bg-dark mb-4"
+      >
+        <div
+          class="container"
+        >
+          <a
+            class="navbar-brand"
+            href="/"
+          >
+            S3InfoSoft Portal
+          </a>
+          <button
+            class="navbar-toggler"
+            data-target="#navbarNav"
+            data-toggle="collapse"
+            type="button"
+          >
+            <span
+              class="navbar-toggler-icon"
+            />
+          </button>
+          <div
+            class="collapse navbar-collapse"
+            id="navbarNav"
+          >
+            <ul
+              class="navbar-nav ml-auto"
+            >
+              <li
+                class="nav-item"
+              >
+                <a
+                  class="nav-link"
+                  href="/"
+                >
+                  Home
+                </a>
+              </li>
+              <li
+                class="nav-item"
+              >
+                <a
+                  class="nav-link"
+                  href="/staff"
+                >
+                  Dashboard
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div
+        class="container"
+      />
+    </div>
+  </div>
+</div>
+`;

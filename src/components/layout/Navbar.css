@@ -1,0 +1,59 @@
+.navhdr {
+  border-bottom: 1px solid #c8ced3;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fff;
+  padding-left: 40px;
+}
+
+.nav-link:active {
+  color: #2f353a;
+}
+
+link > img {
+  width: 89px;
+  height: 25px;
+  font-size: 1.09375rem;
+}
+
+.imgAvtr {
+  border-radius: 50%;
+  height: 35px;
+  margin: 0 10px;
+}
+
+.drpMenu {
+  padding: 0;
+}
+
+.hdrMnu {
+  background: #e4e7ea;
+  border-bottom: 1px solid #c8ced3;
+}
+
+.dropdown-header {
+  font-size: 0.76563rem;
+}
+
+.dropdown-item {
+  padding: 10px 20px;
+  border-bottom: 1px solid #c8ced3;
+  font-size: 0.875rem;
+}
+
+.dropdown-item i {
+    display: inline-block;
+    width: 20px;
+    margin-right: 10px;
+    margin-left: -10px;
+    color: #c8ced3;
+    text-align: center;
+}
+
+/* ie11 floating footer temp fix, react only */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  #root {
+    display: flex;
+    flex-direction: column;
+  }
+}

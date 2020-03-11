@@ -6,6 +6,7 @@ import { act as domACT } from "react-dom/test-utils";
 // import { createMemoryHistory } from "history";
 import { MemoryRouter } from "react-router-dom";
 
+
 import App from "./App";
 
 let container = null;
@@ -22,13 +23,18 @@ afterEach(() => {
   container = null;
 });
 
+
 it("renders App component and validate its snapshot", () => {
+  
   // Check snapshot of the component while rendering!
   domACT(() => {
     render(<App />, container);
   });
   expect(container).toMatchSnapshot();
+
+
 });
+
 
 // it("Interact with routed page", () => {
 //   // Interact with routed page
@@ -45,3 +51,6 @@ it("renders App component and validate its snapshot", () => {
 //   });
 //   expect(container.textContent).toBe('Home');
 // })
+
+
+

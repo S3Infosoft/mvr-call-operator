@@ -34,12 +34,12 @@ export default withAuth(class Home extends Component {
     const mainContent = this.state.authenticated ? 
     <div>
         <p className="lead">You have entered the dashboard portal, <Link to="/staff">click here</Link></p>
-        <button className="btn btn-light btn-lg" onClick={this.logout} >Logout</button>
+        <button className="btn btn-light btn-lg" onClick={this.logout} data-testid="toggle" >Logout</button>
     </div>
        :
        <div>
         <p className="lead">If you are a member, please get your credentials from your supervisor</p>
-        <button className="btn btn-dark btn-lg" onClick={this.login} >Login</button>
+        <button className="btn btn-dark btn-lg" onClick={this.login} data-testid="toggle">Login</button>
        </div>
       ;
 

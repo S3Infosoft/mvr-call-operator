@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+// import User from '../users/User';
 
 export default class Staff extends Component {
   state = {
@@ -17,11 +18,17 @@ export default class Staff extends Component {
   render() {
     const { currentUserEmail, currentUserName } = this.state;
     return (
+      <>
       <div>
         <h1>Welcome {currentUserName} </h1>
         <p>Email: {currentUserEmail} </p>
         <p>You have reached the authorized dashboard area of the portal</p>
       </div>
+      {/* <div>
+        <User />
+      </div> */}
+      </>
+
     )
   }
 }

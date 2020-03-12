@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Security, SecureRoute, ImplicitCallback } from "@okta/okta-react";
 
 import Navbar from "./components/layout/Navbar";
-import Navbar2 from "./components/layout/Navbar2";
-import Navbar3 from "./components/layout/Navbar3";
 import Home from "./components/pages/Home";
 import Staff from "./components/pages/Staff";
 import Login from "./components/auth/Login";
@@ -28,7 +26,7 @@ class App extends Component {
           pkce={true}
         >
           <div className="App">
-            <Navbar3 />
+            <Navbar />
             <div className="container">
               <Route path="/" exact={true} component={Home} />
               <SecureRoute path="/staff" exact={true} component={Staff} />

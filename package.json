@@ -5,7 +5,7 @@
   "scripts": {
     "client": "npm start --prefix client",
     "backend": "npm run server --prefix backend",
-    "dev": "concurrently \"npm run backend\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "Phani Kumar K",

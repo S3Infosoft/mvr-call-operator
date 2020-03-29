@@ -1,19 +1,31 @@
 {
-  "name": "compliance-dashboard_mern-stack",
+  "name": "coreui-react",
   "version": "1.0.0",
-  "description": "Run both Client and backed server for compliance dashboard",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "is-empty": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.6",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "validator": "^13.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
   "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "backend": "npm run server --prefix backend",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "Phani Kumar K",
-  "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^5.1.0"
-  },
-  "dependencies": {
-    "moment": "^2.24.0"
-  }
+  "license": "ISC"
 }

@@ -5,6 +5,7 @@ import { Container } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
+import PrivateRoute from '../../private-route/PrivateRoute';
 
 import {
   AppAside,

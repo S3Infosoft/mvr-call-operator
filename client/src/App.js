@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 // import { renderRoutes } from 'react-router-config';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 
-import { Provider } from "react-redux";
+import { Provider, connect } from "react-redux";
+import PropTypes from "prop-types";
 import store from "./store";
 
 import "./App.scss";
@@ -50,45 +51,56 @@ if (localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <HashRouter>
-          <React.Suspense fallback={loading()}>
-            <Switch>
-              <Route
-                exact
-                path="/login"
-                name="Login Page"
-                render={props => <Login {...props} />}
-              />
-              <Route
-                exact
-                path="/register"
-                name="Register Page"
-                render={props => <Register {...props} />}
-              />
-              <Route
-                exact
-                path="/404"
-                name="Page 404"
-                render={props => <Page404 {...props} />}
-              />
-              <Route
-                exact
-                path="/500"
-                name="Page 500"
-                render={props => <Page500 {...props} />}
-              />
+      // <Provider store={store}>
+      <HashRouter>
+        <React.Suspense fallback={loading()}>
+          <Switch>
+            <Route
+              exact
+              path="/login"
+              name="Login Page"
+              render={props => <Login {...props} />}
+            />
+            <Route
+              exact
+              path="/register"
+              name="Register Page"
+              render={props => <Register {...props} />}
+            />
+            <Route
+              exact
+              path="/404"
+              name="Page 404"
+              render={props => <Page404 {...props} />}
+            />
+            <Route
+              exact
+              path="/500"
+              name="Page 500"
+              render={props => <Page500 {...props} />}
+            />
+            {this.props.auth.isAuthenticated === true ? (
               <Route
                 path="/"
                 name="Home"
                 render={props => <DefaultLayout {...props} />}
               />
-            </Switch>
-          </React.Suspense>
-        </HashRouter>
-      </Provider>
+            ) : (
+              <Redirect to="/login" />
+            )}
+          </Switch>
+        </React.Suspense>
+      </HashRouter>
     );
   }
 }
 
-export default App;
+App.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(App);

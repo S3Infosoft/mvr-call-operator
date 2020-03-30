@@ -10,3 +10,9 @@ content-type: application/x-www-form-urlencoded
     "role": "Guest",
     "status": "Active",
 }
+
+###
+
+POST https://developers.myoperator.co/search?token=955ea4604e2f58e4b693192251f3b5ef
+
+{"content-type": "application/x-www-form-urlencoded"}

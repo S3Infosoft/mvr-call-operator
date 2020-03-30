@@ -1,8 +1,13 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING, GET_USERS } from "./types";
-
+import {
+  GET_ERRORS,
+  SET_CURRENT_USER,
+  USER_LOADING,
+  GET_USERS,
+  GET_LOGS
+} from "./types";
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -62,18 +67,33 @@ export const logoutUser = history => dispatch => {
   dispatch(setCurrentUser({}));
 };
 
-
-
 // Get users
-
 export const fetchUsers = () => dispatch => {
-  
-    fetch('http://localhost:5000/api/users/userslist')
-      .then(res => res.json())
-      .then(data => dispatch({
+  fetch("http://localhost:5000/api/users/userslist")
+    .then(res => res.json())
+    .then(data =>
+      dispatch({
         type: GET_USERS,
         payload: data
-      }));
-  
-}
+      })
+    );
+};
 
+// Get logs
+export const fetchLogs = () => dispatch => {
+  fetch("https://developers.myoperator.co/search", {
+    method: "post",
+    headers: new Headers({
+      "content-type": "application/x-www-form-urlencoded",
+      "Access-control-Allow-Origin": "*"
+    }),
+    body: process.env.REACT_APP_MYORG_API
+  })
+    .then(res => res.json())
+    .then(data =>
+      dispatch({
+        type: GET_LOGS,
+        payload: data
+      })
+    );
+};

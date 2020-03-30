@@ -12,7 +12,27 @@ const validateLoginInput = require("../validation/login");
 const User = require("../models/User");
 
 
-// @route GET api/users/register
+
+// @route GET api/users/logs
+// @desc Get all logs
+// @access Private
+// Still pending to work
+router.get('/logs', (req, res) => {
+  
+    
+     fetch('https://developers.myoperator.co/search', { 
+      method: 'post', 
+      headers: new Headers({
+        "content-type": "application/x-www-form-urlencoded"
+      }), 
+      body: "token=955ea4604e2f58e4b693192251f3b5ef"
+    }).then(res => res.json()).then(data => res.send(data))
+  
+})
+
+
+
+// @route GET api/users/userslist
 // @desc Get all users
 // @access Private
 router.get('/userslist', async (req, res) => {
@@ -22,7 +42,6 @@ router.get('/userslist', async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message});
   }
-
 })
 
 

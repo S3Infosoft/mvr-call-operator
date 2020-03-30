@@ -1,0 +1,12 @@
+POST http://localhost:5000/api/users/register
+
+content-type: application/x-www-form-urlencoded
+
+{
+    "name": "Phani Kumar",
+    "email": "test@test.com",
+    "password": "test123",
+    "password2": "test123",
+    "role": "Guest",
+    "status": "Active",
+}

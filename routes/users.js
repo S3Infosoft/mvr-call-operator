@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
+const fetch = require('cross-fetch');
+
 
 // Load input validation
 const validateRegisterInput = require("../validation/register");
@@ -11,39 +13,33 @@ const validateLoginInput = require("../validation/login");
 // Load User model
 const User = require("../models/User");
 
-
-
 // @route GET api/users/logs
 // @desc Get all logs
 // @access Private
 // Still pending to work
-router.get('/logs', (req, res) => {
-  
-    
-     fetch('https://developers.myoperator.co/search', { 
-      method: 'post', 
-      headers: new Headers({
-        "content-type": "application/x-www-form-urlencoded"
-      }), 
-      body: "token=955ea4604e2f58e4b693192251f3b5ef"
-    }).then(res => res.json()).then(data => res.send(data))
-  
-})
-
-
+router.get("/logs", (req, res) => {
+  fetch("https://developers.myoperator.co/search", {
+    method: "post",
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
+    body: "token=84e28fd79b1cd6a3dc2907c036991ccd",
+  })
+    .then((res) => res.json())
+    .then((data) => res.send(data));
+});
 
 // @route GET api/users/userslist
 // @desc Get all users
 // @access Private
-router.get('/userslist', async (req, res) => {
+router.get("/userslist", async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
   } catch (err) {
-    res.status(500).json({ message: err.message});
+    res.status(500).json({ message: err.message });
   }
-})
-
+});
 
 // @route POST api/users/register
 // @desc Register user
@@ -57,14 +53,14 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  User.findOne({ email: req.body.email }).then(user => {
+  User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
     } else {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
       });
 
       // Hash password before saving in database
@@ -74,8 +70,8 @@ router.post("/register", (req, res) => {
           newUser.password = hash;
           newUser
             .save()
-            .then(user => res.json(user))
-            .catch(err => console.log(err));
+            .then((user) => res.json(user))
+            .catch((err) => console.log(err));
         });
       });
     }
@@ -95,31 +91,31 @@ router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   // Find user by email
-  User.findOne({ email }).then(user => {
+  User.findOne({ email }).then((user) => {
     // Check if user exists
     if (!user) {
       return res.status(404).json({ emailnotfound: "Email not found" });
     }
     // Check password
-    bcrypt.compare(password, user.password).then(isMatch => {
+    bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
         // User matched
         // Create JWT Payload
         const payload = {
           id: user.id,
-          name: user.name
+          name: user.name,
         };
         // Sign token
         jwt.sign(
           payload,
           keys.secretOrKey,
           {
-            expiresIn: 31556926 // 1 year in seconds
+            expiresIn: 31556926, // 1 year in seconds
           },
           (err, token) => {
             res.json({
               success: true,
-              token: "Bearer " + token
+              token: "Bearer " + token,
             });
           }
         );

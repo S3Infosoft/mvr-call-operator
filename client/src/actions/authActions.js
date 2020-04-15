@@ -81,14 +81,7 @@ export const fetchUsers = () => dispatch => {
 
 // Get logs
 export const fetchLogs = () => dispatch => {
-  fetch("https://developers.myoperator.co/search", {
-    method: "post",
-    headers: new Headers({
-      "content-type": "application/x-www-form-urlencoded",
-      "Access-control-Allow-Origin": "*"
-    }),
-    body: process.env.REACT_APP_MYORG_API
-  })
+  fetch("http://localhost:5000/api/users/logs")
     .then(res => res.json())
     .then(data =>
       dispatch({

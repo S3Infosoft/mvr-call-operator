@@ -6,26 +6,26 @@ import {
   SET_CURRENT_USER,
   USER_LOADING,
   GET_USERS,
-  GET_LOGS
+  GET_LOGS,
 } from "./types";
 
 // Register User
-export const registerUser = (userData, history) => dispatch => {
+export const registerUser = (userData, history) => (dispatch) => {
   axios
     .post("/api/users/register", userData)
-    .then(res => history.push("/login")) // re-direct to login on successful register
-    .catch(err =>
+    .then((res) => history.push("/login")) // re-direct to login on successful register
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 // Login - get user token
-export const loginUser = userData => dispatch => {
+export const loginUser = (userData) => (dispatch) => {
   axios
     .post("/api/users/login", userData)
-    .then(res => {
+    .then((res) => {
       // Save to localStorage
       // Set token to localStorage
       const { token } = res.data;
@@ -37,28 +37,28 @@ export const loginUser = userData => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 // Set logged in user
-export const setCurrentUser = decoded => {
+export const setCurrentUser = (decoded) => {
   return {
     type: SET_CURRENT_USER,
-    payload: decoded
+    payload: decoded,
   };
 };
 // User loading
 export const setUserLoading = () => {
   return {
-    type: USER_LOADING
+    type: USER_LOADING,
   };
 };
 // Log user out
-export const logoutUser = history => dispatch => {
+export const logoutUser = (history) => (dispatch) => {
   // Remove token from local storage
   localStorage.removeItem("jwtToken");
   // Remove auth header for future requests
@@ -68,25 +68,28 @@ export const logoutUser = history => dispatch => {
 };
 
 // Get users
-export const fetchUsers = () => dispatch => {
+export const fetchUsers = () => (dispatch) => {
   fetch("http://localhost:5000/api/users/userslist")
-    .then(res => res.json())
-    .then(data =>
+    .then((res) => res.json())
+    .then((data) =>
       dispatch({
         type: GET_USERS,
-        payload: data
+        payload: data,
       })
     );
 };
 
 // Get logs
-export const fetchLogs = () => dispatch => {
-  fetch("http://localhost:5000/api/users/logs")
-    .then(res => res.json())
-    .then(data =>
+export const fetchLogs = () => (dispatch) => {
+  fetch("http://localhost:5000/api/calllogs/logs")
+    .then((res) => res.json())
+    .then((data) => {
+
+      
+
       dispatch({
         type: GET_LOGS,
-        payload: data
-      })
-    );
+        payload: data,
+      });
+    });
 };

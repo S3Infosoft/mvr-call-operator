@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
-const fetch = require('cross-fetch');
+
 
 
 // Load input validation
@@ -13,21 +13,7 @@ const validateLoginInput = require("../validation/login");
 // Load User model
 const User = require("../models/User");
 
-// @route GET api/users/logs
-// @desc Get all logs
-// @access Private
-// Still pending to work
-router.get("/logs", (req, res) => {
-  fetch("https://developers.myoperator.co/search", {
-    method: "post",
-    headers: {
-      "content-type": "application/x-www-form-urlencoded",
-    },
-    body: "token=84e28fd79b1cd6a3dc2907c036991ccd",
-  })
-    .then((res) => res.json())
-    .then((data) => res.send(data));
-});
+
 
 // @route GET api/users/userslist
 // @desc Get all users

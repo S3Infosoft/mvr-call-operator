@@ -5,6 +5,7 @@ const passport = require('passport');
 const cors = require('cors');
 
 const users = require('./routes/users');
+const logs = require('./routes/logs_routes');
 
 const app = express();
 
@@ -31,6 +32,7 @@ require('./config/passport')(passport);
 
 // Routes
 app.use('/api/users', users);
+app.use('/api/calllogs', logs);
 
 // Define the PORT
 const port = process.env.PORT || 5000;

@@ -22,14 +22,14 @@ function LogRow(props) {
   return (
     <tr key={log.user_id}>
       <th scope="row">{index + 1}</th>
-      <td>{log.user_id + " "}</td>
-      <td>{log.name + " "}</td>
       <td>{log.caller_number}</td>
-      <td>{log.state}</td>
       <td>{moment.unix(log.start_time).format("MMMM D YYYY HH:mm")}</td>
       <td>{moment.unix(log.end_time).format("MMMM D YYYY HH:mm")}</td>
       <td>{log.duration}</td>
+      <td>{log.name + " "}</td>
       <td>{log._ds + " "}</td>
+      <td>{log.user_id + " "}</td>
+       
     </tr>
   );
 }
@@ -210,14 +210,15 @@ class Logs extends Component {
                     <thead>
                       <tr>
                         <th scope="col">S.No</th>
-                        <th scope="col">User_ID</th>
-                        <th scope="col">Name</th>
                         <th scope="col">Caller Number</th>
-                        <th scope="col">State</th>
                         <th scope="col">Start time</th>
                         <th scope="col">End time</th>
                         <th scope="col">Duration</th>
-                        <th scope="col">_ds</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Call Result</th>
+                        <th scope="col">User_ID</th>
+                        
+                        
                       </tr>
                     </thead>
                     <tbody>

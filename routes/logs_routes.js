@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const fetch = require("cross-fetch");
+require("dotenv").config();
+
+
 
 // @route GET api/calllogs/logs
 // @desc Get all logs
@@ -12,7 +15,7 @@ router.get("/logs", (req, res) => {
     headers: {
       "content-type": "application/x-www-form-urlencoded",
     },
-    body: "token=84e28fd79b1cd6a3dc2907c036991ccd",
+    body: process.env.OPERATER_TOKEN,
   })
     .then((res) => res.json())
     .then((data) => {

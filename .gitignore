@@ -1,8 +1,5 @@
 node_modules
-.env
 
-
-# Exclude env variables
 nodemon.json
 client/.env
 client/node_modules

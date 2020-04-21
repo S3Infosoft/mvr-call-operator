@@ -6,7 +6,7 @@ const initialState = {
   isAuthenticated: false,
   user: {},
   users: [],
-  logs: {},
+  logs: [],
   loading: false
 };
 

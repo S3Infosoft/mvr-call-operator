@@ -29,7 +29,6 @@ function LogRow(props) {
       <td>{log.name + " "}</td>
       <td>{log._ds + " "}</td>
       <td>{log.user_id + " "}</td>
-       
     </tr>
   );
 }
@@ -40,7 +39,6 @@ class Logs extends Component {
 
     this.state = {
       selection: [],
-      fileName: "Call_Logs_Report",
     };
   }
 
@@ -49,44 +47,20 @@ class Logs extends Component {
   }
 
   getData(data) {
-    let dataArry = [];
-    let vals = data ? data.hits : [];
-    for (let i = 0; i < vals.length; i++) {
-      let dataObj = {};
-      dataObj["caller_number"] = vals[i]._source.caller_number;
-      dataObj["state"] = vals[i]._source.state;
-      dataObj["start_time"] = vals[i]._source.start_time;
-      dataObj["end_time"] = vals[i]._source.end_time;
-      dataObj["duration"] = vals[i]._source.duration;
-
-      if (vals[i]._source.log_details !== []) {
-        dataObj["user_id"] = vals[i]._source.log_details.map(
-          (item) => item.received_by[0].user_id
-        );
-        dataObj["name"] = vals[i]._source.log_details.map(
-          (item) => item.received_by[0].name
-        );
-        dataObj["_ds"] = vals[i]._source.log_details.map((item) => item._ds);
-      }
-      dataArry.push(dataObj);
-    }
-
     let selected = this.state.selection;
-
     console.log(selected);
     if (selected.length == 2) {
-      dataArry = dataArry.filter(
+      data = data.filter(
         (item) =>
           item.start_time >= selected[0] && item.start_time <= selected[1]
       );
     }
-
-    return dataArry;
+    return data;
   }
 
   getCurrentWeek() {
     let curr = new Date();
-    let first = curr.getDate() - curr.getDay() + 1;
+    let first = curr.getDate() - curr.getDay();
     let last = first + 6;
 
     let firstday = new Date(curr.setDate(first)).toUTCString();
@@ -161,7 +135,7 @@ class Logs extends Component {
   createPdf = (html) => Doc.createPdf(html);
 
   render() {
-    let data = this.props.auth.data;
+    let data = this.props.auth;
 
     let dataArry = this.getData(data);
 
@@ -217,8 +191,6 @@ class Logs extends Component {
                         <th scope="col">Name</th>
                         <th scope="col">Call Result</th>
                         <th scope="col">User_ID</th>
-                        
-                        
                       </tr>
                     </thead>
                     <tbody>
@@ -239,7 +211,7 @@ class Logs extends Component {
 
 Logs.propTypes = {
   fetchLogs: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
+  auth: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({

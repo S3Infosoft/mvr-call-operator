@@ -84,9 +84,7 @@ export const fetchLogs = () => (dispatch) => {
   fetch("http://localhost:5000/api/calllogs/logs")
     .then((res) => res.json())
     .then((data) => {
-
-      
-
+      console.log(data);
       dispatch({
         type: GET_LOGS,
         payload: data,

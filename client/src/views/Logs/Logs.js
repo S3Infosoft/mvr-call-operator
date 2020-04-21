@@ -8,7 +8,10 @@ import moment from "moment";
 import { ExportCSV } from "../../utils/ExportCSV";
 import Doc from "../../utils/DocService";
 import PdfContainer from "../../utils/PdfContainer";
+// import Datepicker from "../../utils/Datepicker";
+import DatePicker from "react-date-picker";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
+
 import "./Logs.css";
 
 // import usersData from "./UsersData";
@@ -39,6 +42,8 @@ class Logs extends Component {
 
     this.state = {
       selection: [],
+      fromDate: "",
+      toDate: "",
     };
   }
 
@@ -46,15 +51,28 @@ class Logs extends Component {
     this.props.fetchLogs();
   }
 
+  onChangeFrom = (fromDate) => this.setState({ fromDate });
+  onChangeTo = (toDate) => this.setState({ toDate });
+
   getData(data) {
     let selected = this.state.selection;
-    console.log(selected);
+    const { fromDate, toDate } = this.state;
+
     if (selected.length == 2) {
       data = data.filter(
         (item) =>
           item.start_time >= selected[0] && item.start_time <= selected[1]
       );
     }
+
+    if (typeof fromDate !== "string" && typeof toDate !== "string") {
+      data = data.filter(
+        (item) =>
+          item.start_time >= moment(fromDate).unix() &&
+          item.start_time <= moment(toDate).unix()
+      );
+    }
+
     return data;
   }
 
@@ -163,6 +181,20 @@ class Logs extends Component {
               <Card>
                 <CardHeader>
                   <i className="fa fa-align-justify"></i> CallLogs{" "}
+                  <span style={{ paddingLeft: "50px" }}>
+                    From :{" "}
+                    <DatePicker
+                      onChange={this.onChangeFrom}
+                      value={this.state.fromDate}
+                    />
+                  </span>
+                  <span style={{ paddingLeft: "30px" }}>
+                    To :{" "}
+                    <DatePicker
+                      onChange={this.onChangeTo}
+                      value={this.state.toDate}
+                    />
+                  </span>
                   <span style={{ position: "absolute", right: "3rem" }}>
                     Select your Report :{" "}
                     <select

@@ -62,14 +62,17 @@ class Logs extends Component {
       data = data.filter(
         (item) =>
           item.start_time >= selected[0] && item.start_time <= selected[1]
+
       );
     }
+    console.log(moment(fromDate).unix(), moment(toDate).unix());
 
     if (typeof fromDate !== "string" && typeof toDate !== "string") {
       data = data.filter(
         (item) =>
           item.start_time >= moment(fromDate).unix() &&
           item.start_time <= moment(toDate).unix()
+
       );
     }
 

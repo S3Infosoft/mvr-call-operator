@@ -50,3 +50,4 @@ npm run dev
 - LoginPage/RegisterPage: <http://localhost:3001/login>
 - HomePage/Dashboard: <http://localhost:3001/dashboard>
 - ListOfUsers: <http://localhost:3001/users>
+- ListOfCallLogs: <http://localhost:3001/logs>

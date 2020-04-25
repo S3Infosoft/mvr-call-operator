@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Badge, Card, CardBody, CardHeader, Col, Row, Table } from "reactstrap";
+import { Badge, Card, CardBody, CardHeader, Col, Row, Table, Button } from "reactstrap";
 import { fetchLogs } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
 import { ExportCSV } from "../../utils/ExportCSV";
-import Doc from "../../utils/DocService";
-import PdfContainer from "../../utils/PdfContainer";
+// import Doc from "../../utils/DocService";
+// import PdfContainer from "../../utils/PdfContainer";
 // import Datepicker from "../../utils/Datepicker";
 import DatePicker from "react-date-picker";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import jsPDF from "jspdf";
+import { renderToString } from "react-dom/server";
+import html2canvas from "html2canvas";
+import axios from "axios";
 
 import "./Logs.css";
 
@@ -62,7 +66,6 @@ class Logs extends Component {
       data = data.filter(
         (item) =>
           item.start_time >= selected[0] && item.start_time <= selected[1]
-
       );
     }
     console.log(moment(fromDate).unix(), moment(toDate).unix());
@@ -72,7 +75,6 @@ class Logs extends Component {
         (item) =>
           item.start_time >= moment(fromDate).unix() &&
           item.start_time <= moment(toDate).unix()
-
       );
     }
 
@@ -153,7 +155,48 @@ class Logs extends Component {
     return activeSelection;
   };
 
-  createPdf = (html) => Doc.createPdf(html);
+  // createPdf = (html) => Doc.createPdf(html);
+
+  // generatePDF = () => {
+  //   var doc = new jsPDF("p", "pt");
+  //   doc.addHTML(document.getElementById("pdfdata"), function () {
+  //     doc.save("demo.pdf");
+  //   });
+
+  //   doc.text(20, 20, 'This is the first title.')
+
+  //   doc.setFont('helvetica')
+  //   doc.setFontType('normal')
+  //   doc.text(20, 60, 'This is the second title.')
+
+  //   doc.setFont('helvetica')
+  //   doc.setFontType('normal')
+  //   doc.text(20, 100, 'This is the thrid title.')
+
+  //   doc.save('demo.pdf')
+
+  //   const string = renderToString(<Logs />);
+  // const pdf = new jsPDF();
+  // pdf.fromHTML(string);
+  // pdf.save("pdf");
+  // };
+
+  printDocument() {
+    const input = document.getElementById("logsReport");
+    html2canvas(input).then((canvas) => {
+      var imgWidth = 200;
+      var pageHeight = 290;
+      var imgHeight = (canvas.height * imgWidth) / canvas.width;
+      var heightLeft = imgHeight;
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      var position = 0;
+      var heightLeft = imgHeight;
+      pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
+      var blobPDF = new Blob([pdf.output('blob')], {type: 'application/pdf'});
+      pdf.save("download.pdf");
+    });
+  }
 
   render() {
     let data = this.props.auth;
@@ -164,79 +207,80 @@ class Logs extends Component {
       <div className="animated fadeIn">
         <Row>
           <Col xl={12}>
-            <PdfContainer createPdf={this.createPdf}>
-              <span
-                style={{
-                  position: "absolute",
-                  right: "1rem",
-                  top: "0.3rem",
-                }}
-              >
-                {/* <ExportCSV  csvData={dataArry} fileName={this.state.fileName} /> */}
-                <ReactHTMLTableToExcel
-                  className="btn btn-success"
-                  table="logsReport"
-                  filename="Call_logs_Report"
-                  sheet="Sheet"
-                  buttonText="Export to excel"
-                />
-              </span>
-              <Card>
-                <CardHeader>
-                  <i className="fa fa-align-justify"></i> CallLogs{" "}
-                  <span style={{ paddingLeft: "50px" }}>
-                    From :{" "}
-                    <DatePicker
-                      onChange={this.onChangeFrom}
-                      value={this.state.fromDate}
-                    />
-                  </span>
-                  <span style={{ paddingLeft: "30px" }}>
-                    To :{" "}
-                    <DatePicker
-                      onChange={this.onChangeTo}
-                      value={this.state.toDate}
-                    />
-                  </span>
-                  <span style={{ position: "absolute", right: "3rem" }}>
-                    Select your Report :{" "}
-                    <select
-                      name="reportList"
-                      id="reportSelection"
-                      onChange={this.dataSelection}
-                    >
-                      <option value="0">Complete Report</option>
-                      <option value="1">Current Week</option>
-                      <option value="2">Last Week</option>
-                      <option value="3">Current Month</option>
-                      <option value="4">Last Month</option>
-                    </select>
-                  </span>
-                  {/* <small className="text-muted">example</small> */}
-                </CardHeader>
-                <CardBody>
-                  <Table responsive hover id="logsReport">
-                    <thead>
-                      <tr>
-                        <th scope="col">S.No</th>
-                        <th scope="col">Caller Number</th>
-                        <th scope="col">Start time</th>
-                        <th scope="col">End time</th>
-                        <th scope="col">Duration</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Call Result</th>
-                        <th scope="col">User_ID</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {dataArry.map((log, index) => (
-                        <LogRow key={index} log={log} index={index} />
-                      ))}
-                    </tbody>
-                  </Table>
-                </CardBody>
-              </Card>
-            </PdfContainer>
+            {/* <PdfContainer createPdf={this.createPdf}> */}
+
+            {/* <ExportCSV  csvData={dataArry} fileName={this.state.fileName} /> */}
+            <ReactHTMLTableToExcel
+              className="btn btn-success"
+              table="logsReport"
+              filename="Call_logs_Report"
+              sheet="Sheet"
+              buttonText="Export to excel"
+            />
+            <Button
+              onClick={this.printDocument}
+              variant="contained"
+              color="primary"
+              style={{marginLeft: '10px'}}
+            >
+              Generate Pdf
+            </Button>
+            <Card>
+              <CardHeader>
+                <i className="fa fa-align-justify"></i> CallLogs{" "}
+                <span style={{ paddingLeft: "50px" }}>
+                  From :{" "}
+                  <DatePicker
+                    onChange={this.onChangeFrom}
+                    value={this.state.fromDate}
+                  />
+                </span>
+                <span style={{ paddingLeft: "30px" }}>
+                  To :{" "}
+                  <DatePicker
+                    onChange={this.onChangeTo}
+                    value={this.state.toDate}
+                  />
+                </span>
+                <span style={{ position: "absolute", right: "3rem" }}>
+                  Select your Report :{" "}
+                  <select
+                    name="reportList"
+                    id="reportSelection"
+                    onChange={this.dataSelection}
+                  >
+                    <option value="0">Complete Report</option>
+                    <option value="1">Current Week</option>
+                    <option value="2">Last Week</option>
+                    <option value="3">Current Month</option>
+                    <option value="4">Last Month</option>
+                  </select>
+                </span>
+                {/* <small className="text-muted">example</small> */}
+              </CardHeader>
+              <CardBody>
+                <Table responsive hover id="logsReport">
+                  <thead>
+                    <tr>
+                      <th scope="col">S.No</th>
+                      <th scope="col">Caller Number</th>
+                      <th scope="col">Start time</th>
+                      <th scope="col">End time</th>
+                      <th scope="col">Duration</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Call Result</th>
+                      <th scope="col">User_ID</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dataArry.map((log, index) => (
+                      <LogRow key={index} log={log} index={index} />
+                    ))}
+                  </tbody>
+                </Table>
+              </CardBody>
+            </Card>
+            {/* </PdfContainer> */}
           </Col>
         </Row>
       </div>

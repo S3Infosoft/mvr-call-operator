@@ -68,7 +68,7 @@ class Logs extends Component {
           item.start_time >= selected[0] && item.start_time <= selected[1]
       );
     }
-    console.log(moment(fromDate).unix(), moment(toDate).unix());
+    // console.log(moment(fromDate).unix(), moment(toDate).unix());
 
     if (typeof fromDate !== "string" && typeof toDate !== "string") {
       data = data.filter(
@@ -183,18 +183,20 @@ class Logs extends Component {
 
   printDocument() {
     const input = document.getElementById("logsReport");
-    html2canvas(input).then((canvas) => {
-      var imgWidth = 200;
-      var pageHeight = 290;
-      var imgHeight = (canvas.height * imgWidth) / canvas.width;
-      var heightLeft = imgHeight;
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      var position = 0;
-      var heightLeft = imgHeight;
-      pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
-      var blobPDF = new Blob([pdf.output('blob')], {type: 'application/pdf'});
-      pdf.save("download.pdf");
+    html2canvas(input).then(function (canvas) {
+      var img = canvas.toDataURL('image/png');
+      var doc = new jsPDF('p', 'pt', 'a4');
+      doc.setFontSize(100);
+      doc.addImage(img, 'JPEG', 15, 40, 550, 580);
+      doc.save();
+      var data = doc.output('blob');
+      
+      var formData = new FormData();
+      formData.append("pdf", data, "Report.pdf");
+      var request = new XMLHttpRequest();
+      request.open("POST", "http://localhost:5000/receive"); // Change to your server
+      request.send(formData);
+
     });
   }
 
@@ -225,7 +227,7 @@ class Logs extends Component {
             >
               Generate Pdf
             </Button>
-            <Card>
+            <Card id="logsReport">
               <CardHeader>
                 <i className="fa fa-align-justify"></i> CallLogs{" "}
                 <span style={{ paddingLeft: "50px" }}>
@@ -259,7 +261,7 @@ class Logs extends Component {
                 {/* <small className="text-muted">example</small> */}
               </CardHeader>
               <CardBody>
-                <Table responsive hover id="logsReport">
+                <Table responsive hover>
                   <thead>
                     <tr>
                       <th scope="col">S.No</th>

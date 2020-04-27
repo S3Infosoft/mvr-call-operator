@@ -29,7 +29,10 @@ export const loginUser = (userData) => (dispatch) => {
       // Save to localStorage
       // Set token to localStorage
       const { token } = res.data;
+
+
       localStorage.setItem("jwtToken", token);
+      localStorage.setItem("UserID", userData.email);
       // Set token to Auth header
       setAuthToken(token);
       // Decode token to get user data
@@ -84,7 +87,6 @@ export const fetchLogs = () => (dispatch) => {
   fetch("http://localhost:5000/api/calllogs/logs")
     .then((res) => res.json())
     .then((data) => {
-      
       dispatch({
         type: GET_LOGS,
         payload: data,

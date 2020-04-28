@@ -13,6 +13,7 @@ const nodemailer = require("nodemailer");
 
 const users = require("./routes/users");
 const logs = require("./routes/logs_routes");
+const uploads = require("./routes/uploads_router");
 const dailyDataLoad = require("./jobs/dailyDataLoad");
 // const agenda_routes = require('./routes/agenda_routes');
 
@@ -46,65 +47,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 app.use("/api/calllogs", logs);
-// app.use('/api/agenda', agenda_routes);
-
-// File path
-const filePath = "./static" + "/document/Document.pdf";
-form = new formidable.IncomingForm();
-
-app.post("/receive", function (req, res, next) {
-  var form = new formidable.IncomingForm();
-
-  form.parse(req);
-
-  form.on("fileBegin", function (name, file) {
-    file.path = __dirname + "/uploads/" + file.name;
-  });
-
-  form.on("file", function (name, file) {
-    console.log("Uploaded " + file.name);
-
-    // Step 1
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD,
-      },
-    });
-
-    // Step 2
-    let mailOptions = {
-      from: "kappkumar@gmail.com",
-      to: "appkumark@yahoo.com",
-      subject: "Call Log Report",
-      text: "You'r requested report",
-      attachments: [{ filename: "Report.pdf", path: "./uploads/Report.pdf" }],
-    };
-
-    // Step 3
-    transporter.sendMail(mailOptions, function (err, data) {
-      if (err) {
-        console.log("Error Occurs", err);
-      } else {
-        console.log("Email sent!!!");
-      }
-    });
-  });
-
-  res.send("Done");
-});
-
-// File Upload using routes
-// app.post('/receive', multipartMiddleware, (request, response) => {
-//   fs.readFile(request.files.pdf_file.path, (err, data) => {
-//       fs.writeFile(filePath, data, function (err) {
-//           if (err) throw err;
-//           console.log(filePath)
-//           response.send('Done')
-//       });
-//   })
-// })
+app.use("/", uploads.router);
 
 // Define the PORT
 const port = process.env.PORT || 5000;

@@ -4,16 +4,13 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
 
-
-
 // Load input validation
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
+const uploads = require("./uploads_router");
 
 // Load User model
 const User = require("../models/User");
-
-
 
 // @route GET api/users/userslist
 // @desc Get all users
@@ -64,6 +61,9 @@ router.post("/register", (req, res) => {
   });
 });
 
+
+
+
 // @route POST api/users/login
 // @desc Login user and return JWT token
 // @access Public
@@ -76,6 +76,8 @@ router.post("/login", (req, res) => {
   }
   const email = req.body.email;
   const password = req.body.password;
+  uploads.getcurremail(email);
+
   // Find user by email
   User.findOne({ email }).then((user) => {
     // Check if user exists

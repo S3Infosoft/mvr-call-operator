@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Badge, Card, CardBody, CardHeader, Col, Row, Table, Button } from "reactstrap";
+import {
+  Badge,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Row,
+  Table,
+  Button,
+} from "reactstrap";
 import { fetchLogs } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -184,19 +193,18 @@ class Logs extends Component {
   printDocument() {
     const input = document.getElementById("logsReport");
     html2canvas(input).then(function (canvas) {
-      var img = canvas.toDataURL('image/png');
-      var doc = new jsPDF('p', 'pt', 'a4');
+      var img = canvas.toDataURL("image/png");
+      var doc = new jsPDF("p", "pt", "a4");
       doc.setFontSize(100);
-      doc.addImage(img, 'JPEG', 15, 40, 550, 580);
+      doc.addImage(img, "JPEG", 15, 40, 550, 580);
       doc.save();
-      var data = doc.output('blob');
-      
+      var data = doc.output("blob");
+
       var formData = new FormData();
       formData.append("pdf", data, "Report.pdf");
       var request = new XMLHttpRequest();
       request.open("POST", "http://localhost:5000/receive"); // Change to your server
       request.send(formData);
-
     });
   }
 
@@ -223,7 +231,7 @@ class Logs extends Component {
               onClick={this.printDocument}
               variant="contained"
               color="primary"
-              style={{marginLeft: '10px'}}
+              style={{ marginLeft: "10px" }}
             >
               Generate Pdf
             </Button>

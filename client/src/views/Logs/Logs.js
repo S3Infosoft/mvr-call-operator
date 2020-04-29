@@ -204,7 +204,10 @@ class Logs extends Component {
       formData.append("pdf", data, "Report.pdf");
       var request = new XMLHttpRequest();
       request.open("POST", "http://localhost:5000/receive"); // Change to your server
+      request.onload = function(){ alert (request.responseText); } 
+      request.onerror = function(){ alert (request.responseText); }
       request.send(formData);
+      
     });
   }
 

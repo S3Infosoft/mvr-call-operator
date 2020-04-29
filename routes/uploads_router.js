@@ -48,13 +48,16 @@ router.post("/receive", function (req, res, next) {
     transporter.sendMail(mailOptions, function (err, data) {
       if (err) {
         console.log("Error Occurs", err);
+        res.send(err);
       } else {
         console.log("Email sent!!!");
+        res.send("Report mailed successfully!!");
       }
     });
   });
+  
+  res.send("Check your Inbox for the Report in a minute. If you did not received, please re-login and try again!");
 
-  res.send("Done");
 });
 
 module.exports = { router: router, getcurremail: getcurremail };

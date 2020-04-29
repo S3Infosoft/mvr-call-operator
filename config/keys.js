@@ -1,4 +1,7 @@
+require("dotenv").config();
+
 module.exports = {
-    mongoURI: "mongodb://localhost:27017/coreui-react",
-    secretOrKey: 'hiddensecret'
-}
+  // mongoURI: `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-kom6i.mongodb.net/coreui-react?retryWrites=true&w=majority`,
+  mongoURI: "mongodb://localhost:27017/coreui-react",
+  secretOrKey: "hiddensecret",
+};

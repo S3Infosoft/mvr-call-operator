@@ -6,11 +6,25 @@ require("dotenv").config();
 
 const Logs = require("../models/Logs_model");
 
+
+// @route GET api/users/userslist
+// @desc Get all users
+// @access Private
+router.get("/logs", async (req, res) => {
+  try {
+    const logs = await Logs.find();
+    res.json(logs);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+
 // @route GET api/calllogs/logs
 // @desc Get all logs
 // @access Private
 // Still pending to work
-router.get("/logs", (req, res) => {
+router.get("/log", (req, res) => {
   fetch("https://developers.myoperator.co/search", {
     method: "post",
     headers: {

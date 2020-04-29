@@ -55,9 +55,10 @@ router.post("/receive", function (req, res, next) {
       }
     });
   });
-  
-  res.send("Check your Inbox for the Report in a minute. If you did not received, please re-login and try again!");
 
+  res.send(
+    "Check your Inbox for the Report in a minute. If you did not received, please re-login and try again!"
+  );
 });
 
 module.exports = { router: router, getcurremail: getcurremail };

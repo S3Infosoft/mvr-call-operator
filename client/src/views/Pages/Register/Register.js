@@ -157,6 +157,26 @@ class Register extends Component {
                       />
                       <span className="red-text">{errors.password2}</span>
                     </InputGroup>
+                    {/* <InputGroup className="mb-4">
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="icon-cloud-upload"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        onChange={this.onChange}
+                        value={this.state.password2}
+                        error={errors.password2}
+                        id="password2"
+                        type="password"
+                        className={classnames("", {
+                          invalid: errors.password2
+                        })}
+                        placeholder="Repeat password"
+                        autoComplete="new-password"
+                      />
+                      <span className="red-text">{errors.password2}</span>
+                    </InputGroup> */}
                     <Button color="success" block>
                       Create Account
                     </Button>

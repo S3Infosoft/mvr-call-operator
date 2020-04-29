@@ -43,7 +43,7 @@ function LogRow(props) {
       <td>{moment.unix(log.end_time).format("MMMM D YYYY HH:mm")}</td>
       <td>{log.duration}</td>
       <td>{log.name + " "}</td>
-      <td>{log._ds + " "}</td>
+      <td>{log.call_results + " "}</td>
       <td>{log.user_id + " "}</td>
     </tr>
   );
@@ -215,6 +215,7 @@ class Logs extends Component {
     let data = this.props.auth;
 
     let dataArry = this.getData(data);
+    
 
     return (
       <div className="animated fadeIn">

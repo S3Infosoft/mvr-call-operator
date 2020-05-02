@@ -10,6 +10,7 @@ const fs = require("fs");
 const path = require("path");
 const multipartMiddleware = require("connect-multiparty")();
 const nodemailer = require("nodemailer");
+const helmet = require('helmet');
 
 const users = require("./routes/users");
 const logs = require("./routes/logs_routes");
@@ -24,10 +25,14 @@ cron.schedule("20 */01 * * * ", function () {
   dailyDataLoad();
 });
 
+// Secure your app
+app.use(helmet())
+
 // Bodyparser middleware
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 
 // DB Config
 const db = require("./config/keys").mongoURI;
